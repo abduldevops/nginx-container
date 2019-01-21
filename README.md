@@ -2,6 +2,7 @@
 Using vagrant/aws, ansible  build nginx container and deploy it.
 
 Vagrant - Ansible- Docker - Build and deploy Nginx
+
 1.Install vagrant,virtual box, ansible
 2.
 
