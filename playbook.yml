@@ -1,0 +1,13 @@
+- name: docker nginx
+  hosts: all
+  gather_facts: true
+  any_errors_fatal: true
+  become: "{{ become | default('yes') }}"
+  become_method: "{{ become_method | default('sudo') }}"
+  remote_user: "{{ remote_user | default('ansible') }}"
+  connection: "{{ connection_type | default('ssh') }}"
+  #sudo: true
+
+  tasks:
+    - include_role:
+        name: "docker-nginx"

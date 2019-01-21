@@ -1,0 +1,45 @@
+- name: Create a Docker folder
+  file:
+    path: "{{ docker_folder}}"
+    state: directory
+
+- name: Create a conf.d folder
+  file:
+    path: "{{ docker_folder}}/conf.d"
+    state: directory
+
+
+- name: Copy docker file,index.html and nginx.conf files
+  template:
+    src: "{{ item.source }}"
+    dest: "{{ item.destination }}"
+  with_items:
+    - { source: "templates/Dockerfile.j2", destination: "{{ docker_folder }}/Dockerfile" }
+    - { source: "templates/nginx.conf.j2", destination: "{{ docker_folder }}/nginx.conf" }
+    - { source: "templates/default.conf.j2",  destination: "{{ docker_folder }}/conf.d/default.conf" }
+    - { source: "templates/index.html.j2", destination: "{{ docker_folder }}/index.html" }
+
+#- name: Build Docker images from Dockerfile.
+#  docker_image:
+#    name: bp-nginx
+#    tag: "1.0"
+#    path: "{{ docker_folder }}"
+#    state: build
+
+
+#- name: Run a nginx container.
+#  docker_container:
+#    image: bp-nginx:1.0
+#    name: bp-nginx
+#    state: started
+#    ports: "8081:80"
+
+- name: build the image
+  command: docker build -t abdul-bp/alpine-nginx:1.0 "{{ docker_folder}}"
+
+- name: run the image
+  command: docker run -d -p 8085:80 abdul-bp/alpine-nginx:1.0 
+
+  #docker build -t abdul-bp/alpine-nginx:1.2 .
+  #docker rm -f $(docker ps -a -q)
+  #docker run -d -p 8081:80 abdul-bp/alpine-nginx:1.2

@@ -1,0 +1,5 @@
+- name: Install docker in simple way
+  command: "curl -fsSL https://get.docker.com -o get-docker.sh"
+
+- name: Start docker
+  command: "sh get-docker.sh"

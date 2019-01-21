@@ -1,0 +1,6 @@
+- name: Install docker 
+  include_tasks: docker-install.yml
+
+- name: Install nginx 
+  include_tasks: nginx-config.yml
+
