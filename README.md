@@ -23,17 +23,25 @@ on node instance open tcp ports: 8085,8087 and 8090
 ### playbook.yml 
 It will install docker,build nginx image and create nginx container which will be access on node host(ip address) port 8087
 
+```ansible-playbook -i inventory/ playbook.yml```
+
 ### playbook-test.yml 
 Few test cases which will be execuated on node host
+
+```Usage:  ansible-playbook -i inventory/ playbook-test.yml```
 
 ### playbook-compose.yml 
 It will install docker,build and deploy the nginx and mysql containers whcih will access on node host(ip address) port 8090
 it will display "Hello World"
 
+ ```ansible-playbook -i inventory/ playbook-compose.yml```
+
+
 ### playbook-compose-test-yml - it will deploy the new html content on node instance.
 it will display "Welcome to Micro services" 
 here we modify the html content and call docker-compose build and docker-compose up
 
+```ansible-playbook -i inventory/ playbook-compose-test.yml```
  - copy the html contnet
  - docker-compose build
  - docker-compose up -d
