@@ -10,7 +10,7 @@
 
   tasks:
     - name: Positive case-> test port is working and service is up 
-      command: "curl -s -o /dev/null -w '%{http_code}' localhost:8085"
+      command: "curl -s -o /dev/null -w '%{http_code}' localhost:8087"
       register: reg_httpcode 
 
     - name: Positive case-> check http code  
@@ -19,7 +19,7 @@
       when: reg_httpcode.stdout != "200"
     
     - name: Positive case-> test content is valid
-      command: "curl localhost:8085"
+      command: "curl localhost:8087"
       register: reg_content
 
     - name: Positive case-> check content  
