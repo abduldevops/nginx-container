@@ -18,7 +18,7 @@ In both instances create ansible user and make sure that each will communicate w
 make sure that ssh port is open for communication. 
 
 on node instance open tcp ports: 8085,8087 and 8090
-update the inventory file with node instance ip address [file location: inventory/hosts]
+**update the inventory file with node instance ip address [file location: inventory/hosts]**
 
 ## Playbooks usage.
 ### playbook.yml 
