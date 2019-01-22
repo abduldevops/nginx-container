@@ -28,7 +28,7 @@ It will install docker,build nginx image and create nginx container which will b
 ### playbook-test.yml 
 Few test cases which will be execuated on node host
 
-```Usage:  ansible-playbook -i inventory/ playbook-test.yml```
+```ansible-playbook -i inventory/ playbook-test.yml```
 
 ### playbook-compose.yml 
 It will install docker,build and deploy the nginx and mysql containers whcih will access on node host(ip address) port 8090
