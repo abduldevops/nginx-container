@@ -1,0 +1,26 @@
+
+# - name: Go to the docker compose folder and execute command
+#   command: chdir="{{ docker_compose_folder }}"
+
+
+- name: Copy index.html files
+  template:
+    src: "{{ item.source }}"
+    dest: "{{ item.destination }}"
+  with_items:
+    - { source: "templates/index-compose.html.j2", destination: "{{ docker_folder }}/index.html" }
+
+- name: build the docker-compose
+  command: chdir="{{ docker_compose_folder }}" docker-compose build
+  when: 
+    - service_test
+    
+- name: up the docker compose
+  command: chdir="{{ docker_compose_folder }}" docker-compose up -d 
+  when: 
+    - service_test
+
+
+  #docker build -t abdul-bp/alpine-nginx:1.2 .
+  #docker rm -f $(docker ps -a -q)
+  #docker run -d -p 8081:80 abdul-bp/alpine-nginx:1.2

@@ -18,7 +18,9 @@
     - { source: "templates/nginx.conf.j2", destination: "{{ docker_folder }}/nginx.conf" }
     - { source: "templates/default.conf.j2",  destination: "{{ docker_folder }}/conf.d/default.conf" }
     - { source: "templates/index.html.j2", destination: "{{ docker_folder }}/index.html" }
+    - { source: "templates/docker-compose.yml.j2", destination: "{{ docker_compose_folder }}/docker-compose.yml" }
 
+    
 #- name: Build Docker images from Dockerfile.
 #  docker_image:
 #    name: bp-nginx
@@ -34,11 +36,11 @@
 #    state: started
 #    ports: "8081:80"
 
-- name: build the image
-  command: docker build -t abdul-bp/alpine-nginx:1.0 "{{ docker_folder}}"
+# - name: build the image
+#   command: docker build -t abdul-bp/alpine-nginx:1.0 "{{ docker_folder}}"
 
-- name: run the image
-  command: docker run -d -p 8085:80 abdul-bp/alpine-nginx:1.0 
+# - name: run the image
+#   command: docker run -d -p 8085:80 abdul-bp/alpine-nginx:1.0 
 
   #docker build -t abdul-bp/alpine-nginx:1.2 .
   #docker rm -f $(docker ps -a -q)

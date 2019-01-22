@@ -12,5 +12,7 @@
     - include_role:
         name: "docker-nginx"
       vars:
-        run_container: true
+        run_container: false
+        run_service: false
+        service_test: true
 

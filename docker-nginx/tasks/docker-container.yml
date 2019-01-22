@@ -1,0 +1,14 @@
+
+- name: build the image
+  command: docker build -t abdul-bp/alpine-nginx:1.0 "{{ docker_folder}}"
+  when: 
+    - run_container
+
+- name: run the image
+  command: docker run -d -p 8087:80 abdul-bp/alpine-nginx:1.0
+  when: 
+    - run_container 
+
+  #docker build -t abdul-bp/alpine-nginx:1.2 .
+  #docker rm -f $(docker ps -a -q)
+  #docker run -d -p 8081:80 abdul-bp/alpine-nginx:1.2

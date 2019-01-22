@@ -1,1 +1,5 @@
 docker_folder: /apps/docker
+docker_compose_folder: /apps
+run_container: true
+run_service: false
+service_test: false

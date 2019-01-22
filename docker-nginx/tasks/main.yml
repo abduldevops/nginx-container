@@ -1,6 +1,33 @@
 - name: Install docker 
   include_tasks: docker-install.yml
+  when: run_container or run_service
 
 - name: Install nginx 
   include_tasks: nginx-config.yml
+  when: run_container or run_service
+
+- name: Docker Container 
+  include_tasks: docker-container.yml
+  when: 
+    - run_container
+
+- name: Install Docker compose 
+  include_tasks: docker-compose-install.yml
+  when: 
+    - run_service
+
+
+- name: Docker compose 
+  include_tasks: docker-compose.yml
+  when: 
+    - run_service
+
+- name: Docker compose 
+  include_tasks: docker-compose-test.yml
+  when: 
+    - service_test
+
+
+
+
 
