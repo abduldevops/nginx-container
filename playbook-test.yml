@@ -1,7 +1,7 @@
 - name: docker nginx
-  hosts: all
+  hosts: docker
   gather_facts: true
-  any_errors_fatal: true
+  any_errors_fatal: false
   become: "{{ become | default('yes') }}"
   become_method: "{{ become_method | default('sudo') }}"
   remote_user: "{{ remote_user | default('ansible') }}"
@@ -9,5 +9,38 @@
   #sudo: true
 
   tasks:
-    - include_role:
-        name: "docker-nginx"
+    - name: Positive case-> test port is working and service is up 
+      command: "curl -s -o /dev/null -w '%{http_code}' localhost:8085"
+      register: reg_httpcode 
+
+    - name: Positive case-> check http code  
+      fail:
+        msg: Http code is not 200 {{ reg_httpcode.stdout }}
+      when: reg_httpcode.stdout != "200"
+    
+    - name: Positive case-> test content is valid
+      command: "curl localhost:8085"
+      register: reg_content
+
+    - name: Positive case-> check content  
+      fail:
+        msg: conetnt is   {{ reg_content.stdout }}
+      when: '"Hello World" not in reg_content.stdout'
+
+    - name:  Negative case-> test other port is open
+      command: "curl -s -o /dev/null -w '%{http_code}' localhost:8086"
+      ignore_errors: yes	      
+      register: reg_port
+    
+    - name: Positive case->  is other port is open
+      fail:
+        msg: conetnt is   {{ reg_port.stdout }}
+      when: reg_port.stdout != "000"
+
+ 
+
+
+
+
+    
+
